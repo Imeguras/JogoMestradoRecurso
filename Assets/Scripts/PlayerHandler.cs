@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations;
-
-
 public class PlayerHandler : MonoBehaviour{
 	[SerializeField] 
 	private Rigidbody2D rb;
@@ -15,8 +13,8 @@ public class PlayerHandler : MonoBehaviour{
 	private float maxSpeed;
 	[SerializeField]
 	private float jumpForce;
-	[SerializeField]
-	private PlayerInput playerInput;
+	
+	private InputMap playerInput;
 	[SerializeField]
 	private Animator animator;
 	[SerializeField]
@@ -25,15 +23,21 @@ public class PlayerHandler : MonoBehaviour{
 	private Transform groundDetectionPoint = null;
 	private bool canMove = true;
 	private int horizontalDirection=1; 
-	void OnEnable(){
-		
-		playerInput.actions.Enable();	
-	}
+	private Vector2 input;
+	
+
+	
+	
 	void Awake(){
+		playerInput = new InputMap();
 	}
+	void OnEnable(){
+		playerInput.Enable();
+
+	}
+	
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         
     }
 
@@ -42,59 +46,24 @@ public class PlayerHandler : MonoBehaviour{
         
     }
 	void FixedUpdate(){
-		//clamp horizontal to max speed
-		//Vector2 velocity = rb.velocity;
-		//velocity.x = Mathf.Clamp(velocity.x, -maxSpeed, maxSpeed);
-		//rb.velocity = velocity;
-		if(this.transform.position.y < -20){
-			SceneManager.LoadScene(0); 
-		}
+		
+		Movement(); 
+		handleAnimations();
+		OutOfBounds();
+		
 		
 	}
-	public void move(InputAction.CallbackContext context){
-		//get the value of the input
-		Vector2 input = context.ReadValue<Vector2>();
-		//if its a leave event, set the input to 0 and animation should end
-		if(context.phase == InputActionPhase.Canceled ){
-			input.x = 0;
-			input.y = 0;
-			
-		}
-
-		
-		
-		//move player
-		//animator
-		if(input.y>0){
-			if(!IsOnGround()){
-				input.y=0;
-
-			}else{
-				//animator.Play("Jump");
-
-			}
-
-		}else if(input.x!=0){
-			if(shouldFlip(input)){
-				Flip();
-			}
-			animator.SetFloat("HorizontalSpeed", Mathf.Abs(input.x));
-			
-			
-		}
-		rb.AddForce(new Vector2(input.x * speed, input.y*jumpForce), ForceMode2D.Impulse);
-
-		
-		
-		
-
-	}
+	void handleAnimations(){
+		animator.SetFloat("HorizontalSpeed", Mathf.Abs(input.x));
+		animator.SetBool("isGround", IsOnGround());
+		animator.SetBool("isFalling", rb.velocity.y < 0);
+	}	
 	bool shouldFlip(Vector2 target){
 
 		return (target.x > 0 && horizontalDirection < 0) || (target.x < 0 && horizontalDirection > 0);
 	}
 	void OnDisable(){
-		playerInput.actions.Disable();
+		playerInput.Disable();
 	}
 	private void Flip () {
 		Vector2 targetRotation = transform.localEulerAngles;
@@ -108,6 +77,27 @@ public class PlayerHandler : MonoBehaviour{
 		
 		
 		return colliderFound != null;
+	}
+	void Movement(){
+		
+		var inputVector = playerInput.Player.Move.ReadValue<Vector2>();
+		input=inputVector;
+		//flip
+		if(shouldFlip(inputVector)){
+			Flip();
+		}
+		if(!IsOnGround()){
+			inputVector.y = 0;
+		}
+		Vector3 movement = new Vector3(inputVector.x* speed, inputVector.y*jumpForce, 0)  * Time.deltaTime;
+        transform.position += movement;
+	
+
+	}
+	void OutOfBounds(){
+		if(this.transform.position.y < -20){
+			SceneManager.LoadScene(0); 
+		}
 	}
 
 }
