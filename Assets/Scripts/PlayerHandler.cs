@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations;
 
 public class PlayerHandler : MonoBehaviour{
 	[SerializeField] 
@@ -13,11 +14,11 @@ public class PlayerHandler : MonoBehaviour{
 	private float jumpForce;
 	[SerializeField]
 	private PlayerInput playerInput;
-
+	[SerializeField]
+	private Animator animator;
 	void OnEnable(){
 		
-		playerInput.actions.Enable();
-		
+		playerInput.actions.Enable();	
 	}
 	void Awake(){
 	}
@@ -32,22 +33,21 @@ public class PlayerHandler : MonoBehaviour{
     {
         
     }
-	public void walkLeft(){
-		//move player left
-		rb.AddForce(new Vector2(-speed, 0), ForceMode2D.Impulse);
-	}
-	public void walkRight(){
-		//move player right
-		rb.AddForce(new Vector2(speed, 0), ForceMode2D.Impulse);
+	public void move(InputAction.CallbackContext context){
+		//get the value of the input
+		Vector2 input = context.ReadValue<Vector2>();
+		
+		//move player
+		//animator
+		if(input.y>0){
+			animator.Play("Jump");
+		
+		}else if(input.x!=0){
+			animator.Play("Walkin");
+		}
+		rb.velocity = new Vector2(input.x*speed, rb.velocity.y);
+		
 
-	}
-	public void jump(){
-		//make player jump
-		rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-	}
-	public void croutch(){
-		//make player croutch
-		rb.AddForce(new Vector2(0, -jumpForce), ForceMode2D.Impulse);
 	}
 	void OnDisable(){
 		playerInput.actions.Disable();
