@@ -42,23 +42,32 @@ public class GameManager : MonoBehaviour
 
 	}
 	public int isLevelAvailable(int level){
-		if(level < levels.Count && level >= 0){
-			return levels[level];
+		int ret = -1;
+		try{
+			ret = levels[level];
+		
+		}catch(KeyNotFoundException e){
+			Debug.Log("Level not found"+e.Message);
 		}
-		return -1;
+		return ret;
 
 	}
 	public void addLevelAvailable(int a){
 		if(!levels.ContainsKey(a)){
+			Debug.Log("Adding level " + a);
 			levels.Add(a, 0);
 		}
 		
 
 	}
 	public void setLevel(int level, int value){
-		if(level < levels.Count && level >= 0){
+		try{
 			levels[level] = value;
+		}catch(KeyNotFoundException e){
+			Debug.Log("Level not found"+e.Message);
 		}
+			
+		
 		
 	}
 

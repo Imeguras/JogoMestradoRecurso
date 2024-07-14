@@ -28,6 +28,7 @@ public class porta : MonoBehaviour{
 	}
     void Start(){
 		//Isto nao é um singleton e poderá causar problemas
+		
 		game_manager.GetComponent<GameManager>().addLevelAvailable(level);
 		playerInput.Player.Interact.performed += ctx => StartCoroutine(Interact());
     }
@@ -64,13 +65,12 @@ public class porta : MonoBehaviour{
 				Debug.Log("Level is loading");
 				var k = SceneManager.LoadSceneAsync(level);
 
-				this.animator.SetBool("isOpen", true);
+				this.animator.SetBool("IsOpening", true);
 				while(!k.isDone){
 					//play animation
-					yield return new WaitForSeconds(0.1f);
+					yield return new WaitForSeconds(1f);
 				}
-				
-				this.animator.SetBool("isOpen", false);
+			
 				interacted=false ; 
 				k.allowSceneActivation = true;
 				

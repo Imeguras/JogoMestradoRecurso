@@ -32,6 +32,7 @@ public class Key : MonoBehaviour
 		}
 	}
 	public void CollectKey(){
+		Debug.Log("Key has been collected");
 		gameManager.GetComponent<GameManager>().setLevel(level, 1);
 		this.gameObject.SetActive(false);
 		
