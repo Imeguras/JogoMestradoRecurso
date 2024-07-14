@@ -21,7 +21,6 @@ public class PlayerHandler : MonoBehaviour{
 	private LayerMask groundCheckLayers;
 	[SerializeField]
 	private Transform groundDetectionPoint = null;
-	private bool canMove = true;
 	private int horizontalDirection=1; 
 	private Vector2 input;
 	
@@ -89,8 +88,11 @@ public class PlayerHandler : MonoBehaviour{
 		if(!IsOnGround()){
 			inputVector.y = 0;
 		}
-		Vector3 movement = new Vector3(inputVector.x* speed, inputVector.y*jumpForce, 0)  * Time.deltaTime;
-        transform.position += movement;
+
+		//Vector3 movement = new Vector3(inputVector.x* speed, 0, 0)  * Time.deltaTime;
+		
+        //transform.position += movement;
+		rb.AddForce(new Vector2(inputVector.x* speed, jumpForce*inputVector.y), ForceMode2D.Impulse);
 	
 
 	}
