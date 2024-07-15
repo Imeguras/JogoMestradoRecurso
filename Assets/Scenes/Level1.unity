@@ -59495,9 +59495,9 @@ AudioSource:
   m_GameObject: {fileID: 1446183847}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 834b4bbc6d551c0eeb0ccfdce639ad42, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 62756d5e39b49c1a6a74aacc0a95ee0c, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -62916,6 +62916,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1532220887645829296, guid: cac2ce9f57fc6cc69aa229e089f447a1, type: 3}
+      propertyPath: m_Size.x
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2760826889899171443, guid: cac2ce9f57fc6cc69aa229e089f447a1, type: 3}
       propertyPath: m_SortingOrder
       value: 10
@@ -62926,11 +62930,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3721011384646029223, guid: cac2ce9f57fc6cc69aa229e089f447a1, type: 3}
       propertyPath: jumpForce
-      value: 4
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5097346572644816478, guid: cac2ce9f57fc6cc69aa229e089f447a1, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5097346572644816478, guid: cac2ce9f57fc6cc69aa229e089f447a1, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5097346572644816478, guid: cac2ce9f57fc6cc69aa229e089f447a1, type: 3}
       propertyPath: m_GravityScale
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5322853158163182230, guid: cac2ce9f57fc6cc69aa229e089f447a1, type: 3}
       propertyPath: m_Name

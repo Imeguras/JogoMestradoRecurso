@@ -31,9 +31,16 @@ public class Key : MonoBehaviour
 			keyAnimator.SetBool("isCollected", true);
 		}
 	}
-	public void CollectKey(){
+	public IEnumerator CollectKey(){
 		Debug.Log("Key has been collected");
 		gameManager.GetComponent<GameManager>().setLevel(level, 1);
+		//get ready to play
+		this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
+
+		//wait for the sound to finish
+		while(this.GetComponent<AudioSource>().isPlaying){
+			yield return new WaitForSeconds(0.1f);
+		}
 		this.gameObject.SetActive(false);
 		
 		
