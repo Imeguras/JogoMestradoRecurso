@@ -38,9 +38,8 @@ public class TileManager : MonoBehaviour{
 	private GameObject tilePrefab; 
 	static bool finished=false;
 	
-	// Start is called before the first frame updat
-	//Bellow is just to go around the restrictions on android
-	#region GoodCodingPractices 
+	
+	#region LevelsHardcode
 	string level2 = "{\"tiles\": [{\"tileLane\": 0, \"tileSpawn\": 0.1, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 1, \"tileSpawn\": 0.2, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 0, \"tileSpawn\": 0.7, \"tileHit\": 1.0, \"tileMiss\": 0.2}, {\"tileLane\": 2, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 3, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 0, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 1, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 2, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 3, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 0, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 1, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 2, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 3, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 0, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 1, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 2, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}, {\"tileLane\": 3, \"tileSpawn\": 1.0, \"tileHit\": 3.0, \"tileMiss\": 0.2}], \"laneCount\": 4, \"songTrack\": \"clairedelune.wav\"}";
 	#endregion
 	private Dictionary<int, GameObject> levels;
@@ -171,17 +170,19 @@ public class TileManager : MonoBehaviour{
 			//clone prefab
 			GameObject lane = new GameObject(); //Instantiate(prefab);
 
-			#if !UNITY_STANDALONE
+			
 
-				#if !UNITY_EDITOR
-					float height = Camera.main.orthographicSize * 2;
-					
-					//put them on top of the screen
-					float posX = Camera.main.orthographicSize;
-					float heightRatio = posX/laneCount;
-					lane.transform.position = new Vector3(-posX/2 + heightRatio*i + heightRatio/2, height, 0);
-					//fill in the screen
-					lane.transform.localScale = new Vector3(1, heightRatio, 1);
+				#if !UNITY_EDITOR && !UNITY_STANDALONE
+					#if UNITY_ANDROID
+						float height = Camera.main.orthographicSize * 2;
+						
+						//put them on top of the screen
+						float posX = Camera.main.orthographicSize;
+						float heightRatio = posX/laneCount;
+						lane.transform.position = new Vector3(-posX/2 + heightRatio*i + heightRatio/2, height, 0);
+						//fill in the screen
+						lane.transform.localScale = new Vector3(1, heightRatio, 1);
+					#endif
 				#else
 					Debug.Log("Landscape2");
 					float width = Camera.main.orthographicSize * 2 * Camera.main.aspect;
@@ -194,7 +195,7 @@ public class TileManager : MonoBehaviour{
 					//fill in the screen
 					lane.transform.localScale = new Vector3(widthRatio, 1, 1);
 				#endif
-			#endif
+			
 			levels.Add(i, lane);
 
 			

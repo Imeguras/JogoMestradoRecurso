@@ -27,7 +27,7 @@ public class porta : MonoBehaviour{
 		
 	}
     void Start(){
-		//Isto nao é um singleton e poderá causar problemas
+		
 		
 		game_manager.GetComponent<GameManager>().addLevelAvailable(level);
 		playerInput.Player.Interact.performed += ctx => StartCoroutine(Interact());
