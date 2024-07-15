@@ -2,53 +2,108 @@
 	"tiles": [
 		{
 			"tileLane": 0,
-			"tileSpawn": 0.50,
-			"tileHit": 3.10,
+			"tileSpawn": 0.10,
+			"tileHit": 3.0,
 			"tileMiss": 0.20
 		},
 		{
+			"tileLane": 1,
+			"tileSpawn": 0.20,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		},
+		{
+			"tileLane":0, 
+			"tileSpawn": 0.70,
+			"tileHit": 1.0,
+			"tileMiss": 0.20
+		},
+		{
+			"tileLane": 2,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		}, 
+		{
+			"tileLane": 3,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		}, 
+		{
 			"tileLane": 0,
-			"tileSpawn": 0.10,
-			"tileHit": 2,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		},
+		{
+			"tileLane": 1,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		},
+		{
+			"tileLane": 2,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
 			"tileMiss": 0.20
 		},
 		{
 			"tileLane": 3,
-			"tileSpawn": 1.60,
-			"tileHit": 1.40,
-			"tileMiss": 1.30
-		},
-		{
-			"tileLane": 1,
-			"tileSpawn": 1.70,
-			"tileHit": 2.20,
-			"tileMiss": 5
-		},
-		{
-			"tileLane": 0,
-			"tileSpawn": 0.50,
-			"tileHit": 3.10,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
 			"tileMiss": 0.20
 		},
 		{
 			"tileLane": 0,
-			"tileSpawn": 0.10,
-			"tileHit": 2,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		},
+		{
+			"tileLane": 1,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		},
+		{
+			"tileLane": 2,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
 			"tileMiss": 0.20
 		},
 		{
 			"tileLane": 3,
-			"tileSpawn": 1.60,
-			"tileHit": 1.40,
-			"tileMiss": 1.30
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		},
+		{
+			"tileLane": 0,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
 		},
 		{
 			"tileLane": 1,
-			"tileSpawn": 1.70,
-			"tileHit": 2.20,
-			"tileMiss": 5
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		},
+		{
+			"tileLane": 2,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
+		},
+		{
+			"tileLane": 3,
+			"tileSpawn": 1.0,
+			"tileHit": 3.0,
+			"tileMiss": 0.20
 		}
+		
 	],
 	"laneCount": 4,
-	"songTrack": "level1.wav"
+	"songTrack": "clairedelune.wav"
 }
